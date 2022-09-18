@@ -2,9 +2,11 @@
 
 namespace Tests;
 
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Hash;
 
 abstract class TestCase extends BaseTestCase
 {
@@ -19,7 +21,12 @@ abstract class TestCase extends BaseTestCase
     {
         parent::setUp();
 
-        Artisan::call('migrate'); // runs the migration
+        Artisan::call('migrate:fresh'); // runs the migration
+        User::factory()->create([
+            "email" => "test@example.com",
+            "password" => Hash::make("test-password"),
+        ]);
+
     }
 
 
