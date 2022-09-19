@@ -19,7 +19,7 @@ class UserResource extends JsonResource
             "name" => $this->name,
             "email" => $this->email,
             "roles" => $this->roles->map(fn ($role) => $role->name),
-            "accounts" => null, // TODO: Add accounts
+            "accounts" => $this->bankAccounts->count() > 0 ? BankAccountResource::collection($this->bankAccounts) : null,
         ];
     }
 }
