@@ -66,7 +66,7 @@ class LoginTest extends TestCase
     {
         $response = $this->postJson('/api/auth/logout');
 
-        $response->assertStatus(200);
+        $response->assertStatus(401);
         $this->assertFalse(auth()->check());
     }
 }

@@ -2,6 +2,8 @@
 
 namespace Tests;
 
+use App\Enums\Roles;
+use App\Models\BankAccount;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
@@ -26,6 +28,11 @@ abstract class TestCase extends BaseTestCase
             "name" => "Test User",
             "email" => "test@example.com",
             "password" => Hash::make("test-password"),
+        ]);
+        $user = User::where("email","test@example.com")->first();
+        $user->assignRole(Roles::values());
+        BankAccount::factory(5)->create([
+            "user_id" => $user->id
         ]);
 
     }

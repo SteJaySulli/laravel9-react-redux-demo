@@ -14,7 +14,7 @@ class UserPermissionsTest extends TestCase
     public function test_view_own_role_is_correct()
     {
         $user = User::factory()->create()->first();
-        $user->assignRole(Roles::VIEW_OWN->value);
+        $user->syncRoles([Roles::VIEW_OWN->value]);
 
         $this->assertTrue($user->can(Permissions::SHOW_OWN_USER->value));
         $this->assertTrue($user->can(Permissions::SHOW_OWN_BANK_ACCOUNT->value));
@@ -39,7 +39,7 @@ class UserPermissionsTest extends TestCase
     public function test_view_others_role_is_correct()
     {
         $user = User::factory()->create()->first();
-        $user->assignRole(Roles::VIEW_OTHERS->value);
+        $user->syncRoles([Roles::VIEW_OTHERS->value]);
 
         $this->assertFalse($user->can(Permissions::SHOW_OWN_USER->value));
         $this->assertFalse($user->can(Permissions::SHOW_OWN_BANK_ACCOUNT->value));
@@ -64,7 +64,7 @@ class UserPermissionsTest extends TestCase
     public function test_edit_own_role_is_correct()
     {
         $user = User::factory()->create()->first();
-        $user->assignRole(Roles::EDIT_OWN->value);
+        $user->syncRoles([Roles::EDIT_OWN->value]);
 
         $this->assertFalse($user->can(Permissions::SHOW_OWN_USER->value));
         $this->assertFalse($user->can(Permissions::SHOW_OWN_BANK_ACCOUNT->value));
@@ -89,7 +89,7 @@ class UserPermissionsTest extends TestCase
     public function test_edit_others_role_is_correct()
     {
         $user = User::factory()->create()->first();
-        $user->assignRole(Roles::EDIT_OTHERS->value);
+        $user->syncRoles([Roles::EDIT_OTHERS->value]);
 
         $this->assertFalse($user->can(Permissions::SHOW_OWN_USER->value));
         $this->assertFalse($user->can(Permissions::SHOW_OWN_BANK_ACCOUNT->value));

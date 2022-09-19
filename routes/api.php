@@ -24,6 +24,6 @@ Route::prefix("auth")->as("auth.")->group(function() {
     });
 });
 
-Route::middleware('auth:sanctum')->group(function() {
+// Route::middleware('auth:sanctum')->group(function() {
     Route::get("users", UserController::class)->name("users");
-});
+// });
