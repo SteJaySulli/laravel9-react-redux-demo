@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import EmailInput from './EmailInput';
-import PasswordInput from './PasswordInput';
+import EmailInput from '../components/inputs/EmailInput';
+import PasswordInput from '../components/inputs/PasswordInput';
 
 export default function LoginPage(props) {
     const {onLogin} = props;
@@ -23,15 +23,20 @@ export default function LoginPage(props) {
                         setError(null);
                         axios.post(route("api.auth.login"), {
                             email, password
-                        }).then( response => {
-                            onLogin();
-                        }).catch( ({response}) => {
-                            const {data:{message}} = response;
-                            const {data:{errors:{email}}} = response;
-                            if(!!message || !!email ) {
-                                setError(message ?? email);
+                        }).then( ({data}) => {
+                            onLogin(data);
+                        }).catch( (error) => {
+                            const {response} = error;
+                            if(response) {
+                                const {data:{message}} = response;
+                                const {data:{errors:{email}}} = response;
+                                if(!!message || !!email ) {
+                                    setError(message ?? email);
+                                } else {
+                                    setError("An error occured while trying to log in.");
+                                }
                             } else {
-                                setError("An error occured while trying to log in.");
+                                throw error;
                             }
                         })
                     }}>

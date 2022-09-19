@@ -51,8 +51,14 @@ class LoginTest extends TestCase
             ]
         );
         
+        $user = User::where("email", "test@example.com")->first();
+
         $response->assertStatus(200);
-        $response->assertExactJson(["user_id" => User::where("email", "test@example.com")->first()->id]);
+        $response->assertExactJson([
+            "user_id" => $user->id,
+            "name" => $user->name,
+            "email" => $user->email,
+        ]);
         $this->assertTrue(auth()->check());
     }
 

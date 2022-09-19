@@ -16,15 +16,26 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        User::factory(10)->create()->each(function (User $user) {
+        $firstUser = User::factory(10)->create()->each(function (User $user) {
             $user->assignRole(Roles::VIEW_OWN->value);
             $user->assignRole(Roles::EDIT_OWN->value);
             $user->assignRole(Roles::EDIT_OTHERS->value);
             $user->assignRole(Roles::VIEW_OTHERS->value);
-        });
-        User::factory(90)->create()->each(function (User $user) {
+        })->first();
+
+        $firstUser->update([
+            "email" => "admin@example.com",
+            "name" => "Admin User"
+        ]);
+        
+        $secondUser = User::factory(90)->create()->each(function (User $user) {
             $user->assignRole(Roles::VIEW_OWN->value);
             $user->assignRole(Roles::EDIT_OWN->value);
-        });
+        })->first();
+        
+        $secondUser->update([
+            "email" => "user@example.com",
+            "name" => "Standard User",
+        ]);
     }
 }

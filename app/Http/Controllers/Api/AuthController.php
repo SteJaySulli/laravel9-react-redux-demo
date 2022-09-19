@@ -10,6 +10,21 @@ use Illuminate\Support\Facades\Response;
 
 class AuthController extends Controller
 {
+    function user(): JsonResponse
+    {
+        if(!auth()->check()) {
+            return response()->json([
+                "user_id" => null,
+            ]);    
+        }
+
+        return response()->json([
+            "user_id" => auth()->id(),
+            "name" => auth()->user()->name,
+            "email" => auth()->user()->email,
+        ]);
+    }
+
     function login(LoginRequest $request): JsonResponse
     {
         auth()->attempt($request->validated());
@@ -22,6 +37,8 @@ class AuthController extends Controller
         }
         return response()->json([
             "user_id" => auth()->id(),
+            "name" => auth()->user()->name,
+            "email" => auth()->user()->email,
         ]);
     }
 

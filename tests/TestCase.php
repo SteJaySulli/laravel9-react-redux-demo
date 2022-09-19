@@ -23,6 +23,7 @@ abstract class TestCase extends BaseTestCase
 
         Artisan::call('migrate:fresh'); // runs the migration
         User::factory()->create([
+            "name" => "Test User",
             "email" => "test@example.com",
             "password" => Hash::make("test-password"),
         ]);
