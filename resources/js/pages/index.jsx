@@ -50,7 +50,6 @@ export default function App(props) {
 }
 
 const container = document.getElementById("react-app");
-console.log("container:", container)
 if (container) {
     render(
         <Provider store={store}>
