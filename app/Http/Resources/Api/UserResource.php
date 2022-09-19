@@ -18,6 +18,7 @@ class UserResource extends JsonResource
             "id" => $this->id,
             "name" => $this->name,
             "email" => $this->email,
+            "roles" => $this->roles->map(fn ($role) => $role->name),
             "accounts" => null, // TODO: Add accounts
         ];
     }
