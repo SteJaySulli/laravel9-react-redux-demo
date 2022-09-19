@@ -36,12 +36,12 @@ export default function UserListPage(props) {
         <tbody>
             {!!list && list.map((user, userIndex) => <tr
                 key={userIndex}
-                class="clickable-row"
+                className="clickable-row"
                 onClick={() => onSelectUser(user.accounts)}
             >
                 <td>{user.name}</td>
                 <td>{user.email}</td>
-                <td>{user.roles.map((role, roleIndex) => <div className="badge bg-secondary m-1">{formatBadge(role)}</div>)}</td>
+                <td>{user.roles.map((role, roleIndex) => <div key={roleIndex} className="badge bg-secondary m-1">{formatBadge(role)}</div>)}</td>
                 <td>{user.accounts ? user.accounts.length : 0}</td>
                 <td><button className="btn btn-sm btn-primary" type="button" onClick={() => onSelectUser(user.accounts)}>Accounts</button></td>
             </tr>)}

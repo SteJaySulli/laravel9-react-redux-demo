@@ -23,10 +23,12 @@ export default function App(props) {
         axios.get(route("api.auth.user"))
             .then(({ data }) => {
                 dispatch(changeUser(data));
+                dispatch(selectUser({ accounts: null }));
                 dispatch(setLoaded());
             })
             .catch((error) => {
-                throw error;
+                dispatch(selectUser({ accounts: null }));
+                dispatch(setLoaded());
             });
     }, [])
 
@@ -45,7 +47,9 @@ export default function App(props) {
 
     return <div className="container">
         <LogoutBar user={user} onLogout={() => { dispatch(changeUser({})) }} />
-        {!!selected ? <BankAccountLsitPage /> : <UserListPage onSelectUser={ accounts => dispatch(selectUser({accounts}))}/>}
+        <div style={{ overflowX: "auto" }}>
+            {!!selected ? <BankAccountLsitPage /> : <UserListPage onSelectUser={accounts => dispatch(selectUser({ accounts }))} />}
+        </div>
     </div>
 }
 

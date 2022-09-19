@@ -16,5 +16,5 @@ This is an ultra-simple demo app using Laravel 9, React & Redux
 
 * You will need to run `artisan migrate:fresh --seed` in order to seed users and bank accounts
 * 100 users will be seeded in total
-* The password for all users defaults to `password` for simplicity
+* The password for all users defaults to `l3t-M3-1n+NOW!` for simplicity
 * You can log in using either `admin@example.com` or `user@example.com` to see the two types of users across four roles

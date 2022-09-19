@@ -16,3 +16,7 @@
 .clickable-row:hover {
     background: rgba(0, 0, 0, 0.1);;
 }
+
+.table {
+    overflow-x: auto;
+}
