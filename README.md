@@ -11,3 +11,10 @@ This is an ultra-simple demo app using Laravel 9, React & Redux
   * Used redacted bank account details for display
 * I have used Laravel sail for the first time during development; This is instead of using homestead as I have previously
 * My focus here was on logic and security, so forgive the somewhat basic styling using Bootstrap via a CDN!
+
+# Default Users
+
+* You will need to run `artisan migrate:fresh --seed` in order to seed users and bank accounts
+* 100 users will be seeded in total
+* The password for all users defaults to `password` for simplicity
+* You can log in using either `admin@example.com` or `user@example.com` to see the two types of users across four roles
